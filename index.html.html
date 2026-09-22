@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Deusi Bhailo - 7 Day Attendance</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff7ed;
+      color: #292524;
+    }
+
+    header {
+      background: linear-gradient(135deg, #991b1b, #b45309);
+      color: white;
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    .diya {
+      font-size: 50px;
+    }
+
+    header h1 {
+      margin: 10px 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      opacity: 0.9;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: auto;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .stat {
+      background: white;
+      padding: 22px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #dc2626;
+    }
+
+    .stat-label {
+      color: #78716c;
+      margin-top: 5px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin-bottom: 25px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    }
+
+    .card h2 {
+      color: #92400e;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d6d3d1;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      border: none;
+      padding: 13px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-present {
+      background: #16a34a;
+      color: white;
+    }
+
+    .btn-absent {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-add {
+      width: 100%;
+      margin-top: 18px;
+      background: #b45309;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .btn-export {
+      background: #1d4ed8;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .success {
+      color: #15803d;
+    }
+
+    .error {
+      color: #dc2626;
+    }
+
+    .day-card {
+      border: 1px solid #e7e5e4;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .day-header {
+      background: #fffbeb;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .day-title {
+      font-weight: bold;
+      color: #92400e;
+    }
+
+    .day-count {
+      font-size: 0.85rem;
+      color: #78716c;
+    }
+
+    .attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .attendance-table th {
+      background: #fafaf9;
+      font-size: 0.85rem;
+    }
+
+    .present {
+      color: #15803d;
+      font-weight: bold;
+    }
+
+    .absent {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .empty {
+      text-align: center;
+      color: #78716c;
+      padding: 20px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .small-button {
+      padding: 7px 10px;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #78716c;
+    }
+
+    @media (max-width: 700px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .attendance-table {
+        font-size: 0.85rem;
+      }
+
+      .attendance-table th,
+      .attendance-table td {
+        padding: 9px 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="diya">🪔</div>
+  <h1>Deusi Bhailo Attendance</h1>
+  <p>7-Day Tihar Attendance History</p>
+</header>
+
+
+<main class="container">
+
+  <!-- DASHBOARD -->
+
+  <section class="dashboard">
+
+    <div class="stat">
+      <div class="stat-number" id="totalPeople">0</div>
+      <div class="stat-label">Total People</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="todayPresent">0</div>
+      <div class="stat-label">Today's Present</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="daysRecorded">0</div>
+      <div class="stat-label">Days Recorded</div>
+    </div>
+
+  </section>
+
+
+  <!-- ADD ATTENDANCE -->
+
+  <section class="card">
+
+    <h2>📝 Record Attendance</h2>
+
+    <div class="form-grid">
+
+      <div>
+        <label for="personName">
+          Person's Name
+        </label>
+
+        <input
+          type="text"
+          id="personName"
+          placeholder="Enter person's name"
+          maxlength="60"
+        >
+      </div>
+
+
+      <div>
+        <label for="attendanceDate">
+          Date
+        </label>
+
+        <input
+          type="date"
+          id="attendanceDate"
+        >
+      </div>
+
+    </div>
+
+
+    <div class="action-buttons" style="margin-top:18px;">
+
+      <button
+        class="btn-present"
+        id="presentButton"
+      >
+        ✓ Present
+      </button>
+
+      <button
+        class="btn-absent"
+        id="absentButton"
+      >
+        ✕ Absent
+      </button>
+
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+  </section>
+
+
+  <!-- HISTORY -->
+
+  <section class="card">
+
+    <h2>📅 7-Day Attendance History</h2>
+
+    <button
+      class="btn-export"
+      id="exportButton"
+    >
+      📥 Export 7-Day History
+    </button>
+
+    <div id="history">
+
+      <div class="empty">
+        Loading attendance...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  🪔 Happy Tihar &nbsp; • &nbsp; Deusi Bhailo
+  <br>
+  7-Day Attendance System
+</footer>
+
+
+
+<!-- ==================================================
+     FIREBASE
+================================================== -->
+
+<script type="module">
+
+  import {
+    initializeApp
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy,
+    serverTimestamp,
+    getDocs
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+  /*
+  ==================================================
+  FIREBASE CONFIGURATION
+
+  Replace these values with your Firebase project
+  configuration.
+  ==================================================
+  */
+
+  const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain:
+      "YOUR_PROJECT.firebaseapp.com",
+
+    projectId:
+      "YOUR_PROJECT_ID",
+
+    storageBucket:
+      "YOUR_PROJECT.firebasestorage.app",
+
+    messagingSenderId:
+      "YOUR_MESSAGING_SENDER_ID",
+
+    appId:
+      "YOUR_APP_ID"
+
+  };
+
+
+  // Initialize Firebase
+
+  const app =
+    initializeApp(firebaseConfig);
+
+
+  const db =
+    getFirestore(app);
+
+
+  // Collection name
+
+  const attendanceCollection =
+    collection(db, "deusiAttendance");
+
+
+  /*
+  ==================================================
+  HTML ELEMENTS
+  ==================================================
+  */
+
+  const personName =
+    document.getElementById("personName");
+
+  const attendanceDate =
+    document.getElementById("attendanceDate");
+
+  const presentButton =
+    document.getElementById("presentButton");
+
+  const absentButton =
+    document.getElementById("absentButton");
+
+  const message =
+    document.getElementById("message");
+
+  const history =
+    document.getElementById("history");
+
+  const totalPeople =
+    document.getElementById("totalPeople");
+
+  const todayPresent =
+    document.getElementById("todayPresent");
+
+  const daysRecorded =
+    document.getElementById("daysRecorded");
+
+  const exportButton =
+    document.getElementById("exportButton");
+
+
+  /*
+  ==================================================
+  SET TODAY'S DATE
+  ==================================================
+  */
+
+  function getToday() {
+
+    const today = new Date();
+
+    const year =
+      today.getFullYear();
+
+    const month =
+      String(today.getMonth() + 1)
+      .padStart(2, "0");
+
+    const day =
+      String(today.getDate())
+      .padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+  }
+
+
+  attendanceDate.value =
+    getToday();
+
+
+  /*
+  ==================================================
+  ADD ATTENDANCE
+  ==================================================
+  */
+
+  async function recordAttendance(status) {
+
+    const name =
+      personName.value.trim();
+
+    const date =
+      attendanceDate.value;
+
+
+    if (!name) {
+
+      showMessage(
+        "Please enter the person's name.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!date) {
+
+      showMessage(
+        "Please select a date.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      await addDoc(
+        attendanceCollection,
+        {
+
+          name: name,
+
+          date: date,
+
+          status: status,
+
+          createdAt:
+            serverTimestamp()
+
+        }
+      );
+
+
+      showMessage(
+        `${name} marked ${status}.`,
+        "success"
+      );
+
+
+      personName.value = "";
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        "Could not save attendance.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  presentButton.addEventListener(
+    "click",
+    () => {
+
+      recordAttendance("Present");
+
+    }
+  );
+
+
+  absentButton.addEventListener(
+    "click",
+    () => {
+
+      recordAttendance("Absent");
+
+    }
+  );
+
+
+  /*
+  ==================================================
+  SHOW MESSAGE
+  ==================================================
+  */
+
+  function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+      "message " + type;
+
+
+    setTimeout(() => {
+
+      message.textContent = "";
+
+    }, 3500);
+
+  }
+
+
+  /*
+  ==================================================
+  REAL-TIME DATA
+  ==================================================
+  */
+
+  const attendanceQuery =
+    query(
+      attendanceCollection,
+      orderBy("createdAt", "desc")
+    );
+
+
+  let allAttendance = [];
+
+
+  onSnapshot(
+    attendanceQuery,
+    (snapshot) => {
+
+      allAttendance = [];
+
+
+      snapshot.forEach((doc) => {
+
+        allAttendance.push({
+
+          id: doc.id,
+
+          ...doc.data()
+
+        });
+
+      });
+
+
+      updateDashboard();
+
+      displayHistory();
+
+    },
+
+    (error) => {
+
+      console.error(error);
+
+      history.innerHTML =
+        `<div class="empty">
+          Unable to load attendance.
+        </div>`;
+
+    }
+  );
+
+
+  /*
+  ==================================================
+  DASHBOARD
+  ==================================================
+  */
+
+  function updateDashboard() {
+
+    const uniquePeople =
+      new Set(
+        allAttendance.map(
+          item => item.name.toLowerCase()
+        )
+      );
+
+
+    totalPeople.textContent =
+      uniquePeople.size;
+
+
+    const today =
+      getToday();
+
+
+    const todayRecords =
+      allAttendance.filter(
+        item =>
+          item.date === today &&
+          item.status === "Present"
+      );
+
+
+    todayPresent.textContent =
+      new Set(
+        todayRecords.map(
+          item => item.name.toLowerCase()
+        )
+      ).size;
+
+
+    const recordedDays =
+      new Set(
+        allAttendance.map(
+          item => item.date
+        )
+      );
+
+
+    daysRecorded.textContent =
+      recordedDays.size;
+
+  }
+
+
+  /*
+  ==================================================
+  CREATE 7 DAYS
+  ==================================================
+  */
+
+  function getLastSevenDays() {
+
+    const dates = [];
+
+    const today =
+      new Date();
+
+
+    for (
+      let i = 6;
+      i >= 0;
+      i--
+    ) {
+
+      const date =
+        new Date(today);
+
+      date.setDate(
+        today.getDate() - i
+      );
+
+
+      const year =
+        date.getFullYear();
+
+      const month =
+        String(date.getMonth() + 1)
+        .padStart(2, "0");
+
+      const day =
+        String(date.getDate())
+        .padStart(2, "0");
+
+
+      dates.push(
+        `${year}-${month}-${day}`
+      );
+
+    }
+
+
+    return dates;
+
+  }
+
+
+  /*
+  ==================================================
+  DISPLAY HISTORY
+  ==================================================
+  */
+
+  function displayHistory() {
+
+    const sevenDays =
+      getLastSevenDays();
+
+
+    history.innerHTML = "";
+
+
+    sevenDays.forEach(date => {
+
+      const records =
+        allAttendance.filter(
+          item => item.date === date
+        );
+
+
+      const present =
+        records.filter(
+          item => item.status === "Present"
+        );
+
+
+      const absent =
+        records.filter(
+          item => item.status === "Absent"
+        );
+
+
+      const formattedDate =
+        new Date(
+          date + "T00:00:00"
+        ).toLocaleDateString(
+          undefined,
+          {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+
+      const dayCard =
+        document.createElement("div");
+
+      dayCard.className =
+        "day-card";
+
+
+      dayCard.innerHTML = `
+
+        <div class="day-header">
+
+          <div class="day-title">
+            📅 ${formattedDate}
+          </div>
+
+          <div class="day-count">
+            ${present.length} Present
+            •
+            ${absent.length} Absent
+          </div>
+
+        </div>
+
+      `;
+
+
+      if (records.length === 0) {
+
+        dayCard.innerHTML += `
+
+          <div class="empty">
+            No attendance recorded for this day.
+          </div>
+
+        `;
+
+      } else {
+
+        const table =
+          document.createElement("table");
+
+        table.className =
+          "attendance-table";
+
+
+        table.innerHTML = `
+
+          <thead>
+
+            <tr>
+
+              <th>Name</th>
+
+              <th>Status</th>
+
+              <th>Time</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody></tbody>
+
+        `;
+
+
+        const tbody =
+          table.querySelector("tbody");
+
+
+        records.forEach(record => {
+
+          const row =
+            document.createElement("tr");
+
+
+          let time = "-";
+
+
+          if (record.createdAt) {
+
+            try {
+
+              time =
+                record.createdAt
+                .toDate()
+                .toLocaleTimeString(
+                  [],
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  }
+                );
+
+            } catch (e) {}
+
+          }
+
+
+          row.innerHTML = `
+
+            <td>
+              ${escapeHTML(record.name)}
+            </td>
+
+            <td class="${
+              record.status === "Present"
+              ? "present"
+              : "absent"
+            }">
+
+              ${
+                record.status === "Present"
+                ? "✓ Present"
+                : "✕ Absent"
+              }
+
+            </td>
+
+            <td>
+              ${time}
+            </td>
+
+          `;
+
+
+          tbody.appendChild(row);
+
+        });
+
+
+        dayCard.appendChild(table);
+
+      }
+
+
+      history.appendChild(dayCard);
+
+    });
+
+  }
+
+
+  /*
+  ==================================================
+  SECURITY:
+  ESCAPE USER INPUT
+  ==================================================
+  */
+
+  function escapeHTML(text) {
+
+    const div =
+      document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+  }
+
+
+  /*
+  ==================================================
+  EXPORT CSV
+  ==================================================
+  */
+
+  exportButton.addEventListener(
+    "click",
+    () => {
+
+      if (allAttendance.length === 0) {
+
+        alert(
+          "There is no attendance data to export."
+        );
+
+        return;
+
+      }
+
+
+      let csv =
+        "Date,Name,Status,Time\n";
+
+
+      allAttendance.forEach(record => {
+
+        let time = "";
+
+
+        if (record.createdAt) {
+
+          try {
+
+            time =
+              record.createdAt
+              .toDate()
+              .toLocaleTimeString();
+
+          } catch (e) {}
+
+        }
+
+
+        csv +=
+          `"${record.date}",` +
+          `"${record.name.replace(/"/g, '""')}",` +
+          `"${record.status}",` +
+          `"${time}"\n`;
+
+      });
+
+
+      const blob =
+        new Blob(
+          [csv],
+          {
+            type: "text/csv;charset=utf-8;"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(blob);
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.href = url;
+
+      link.download =
+        "deusi-bhailo-7-day-attendance.csv";
+
+
+      link.click();
+
+
+      URL.revokeObjectURL(url);
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
