@@ -1,515 +1,819 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prakash Sapkota | Mushroom Farmer</title>
+
+    <meta
+        name="description"
+        content="Personal website of Prakash Sapkota, a mushroom farmer from Tulsipur, Dang, Nepal."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* ==============================
+           BASIC SETTINGS
+        ============================== */
+
+        :root {
+            --green: #16a34a;
+            --dark-green: #166534;
+            --light-green: #dcfce7;
+
+            --dark: #172018;
+            --text: #26332a;
+            --muted: #647067;
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Deusi Bhailo Attendance</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:'Poppins',sans-serif;
-    min-height:100vh;
-    color:white;
-    background:
-        radial-gradient(circle at top left,#7c2d12,transparent 35%),
-        radial-gradient(circle at bottom right,#581c87,transparent 35%),
-        linear-gradient(135deg,#120b22,#210f2f,#090717);
-}
-
-.container{
-    width:min(1100px,94%);
-    margin:auto;
-}
-
-/* HEADER */
-
-header{
-    text-align:center;
-    padding:45px 15px 25px;
-}
-
-.logo{
-    font-size:45px;
-    margin-bottom:5px;
-}
-
-header h1{
-    font-family:'Baloo 2',cursive;
-    font-size:clamp(35px,7vw,65px);
-    line-height:1;
-    background:linear-gradient(90deg,#ffd166,#ff7b00,#ff4d6d);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-header p{
-    color:#ddd6fe;
-    margin-top:12px;
-}
-
-/* ONLINE STATUS */
-
-.status{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-top:15px;
-    padding:8px 15px;
-    border-radius:30px;
-    background:rgba(255,255,255,.08);
-    font-size:13px;
-}
-
-.status-dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#22c55e;
-    box-shadow:0 0 12px #22c55e;
-}
-
-/* INPUT */
-
-.input-box{
-    max-width:600px;
-    margin:25px auto;
-    padding:25px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:25px;
-    background:rgba(255,255,255,.07);
-    backdrop-filter:blur(15px);
-}
-
-.input-box label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
-}
-
-input,select{
-    width:100%;
-    padding:15px;
-    border:none;
-    outline:none;
-    border-radius:14px;
-    background:#fff;
-    color:#111827;
-    font-size:16px;
-    margin-bottom:15px;
-}
-
-button{
-    border:none;
-    cursor:pointer;
-    font-family:inherit;
-}
-
-.main-btn{
-    width:100%;
-    padding:15px;
-    border-radius:14px;
-    color:white;
-    font-weight:700;
-    font-size:16px;
-    background:linear-gradient(90deg,#f97316,#ec4899);
-    transition:.25s;
-}
-
-.main-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(236,72,153,.25);
-}
-
-/* DASHBOARD */
-
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin:30px 0;
-}
-
-.stat{
-    padding:25px 15px;
-    text-align:center;
-    border-radius:22px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.1);
-}
-
-.stat .number{
-    font-size:38px;
-    font-weight:800;
-}
-
-.stat p{
-    color:#cbd5e1;
-}
-
-.present-number{
-    color:#4ade80;
-}
-
-.absent-number{
-    color:#fb7185;
-}
-
-.total-number{
-    color:#facc15;
-}
-
-/* DATE */
-
-.date-area{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin:30px 0 15px;
-    flex-wrap:wrap;
-}
-
-.date-area h2{
-    font-family:'Baloo 2';
-    font-size:30px;
-}
-
-/* ATTENDANCE LIST */
-
-.attendance-list{
-    display:grid;
-    gap:12px;
-}
-
-.person{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:17px;
-    border-radius:18px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.person-name{
-    font-weight:700;
-    word-break:break-word;
-}
-
-.person-status{
-    padding:7px 13px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:700;
-}
-
-.present{
-    background:rgba(34,197,94,.15);
-    color:#4ade80;
-}
-
-.absent{
-    background:rgba(244,63,94,.15);
-    color:#fb7185;
-}
-
-.not-marked{
-    background:rgba(148,163,184,.15);
-    color:#cbd5e1;
-}
-
-/* HISTORY */
-
-.history{
-    margin-top:60px;
-}
-
-.history h2{
-    font-family:'Baloo 2';
-    font-size:35px;
-    margin-bottom:20px;
-}
-
-.day-card{
-    margin-bottom:15px;
-    padding:22px;
-    border-radius:22px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.day-header{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:15px;
-}
-
-.day-header h3{
-    color:#facc15;
-}
-
-.badges{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.badge{
-    padding:6px 11px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.green{
-    background:rgba(34,197,94,.15);
-    color:#4ade80;
-}
-
-.red{
-    background:rgba(244,63,94,.15);
-    color:#fb7185;
-}
-
-/* PERSON HISTORY */
-
-.person-history{
-    margin-top:50px;
-    padding:25px;
-    border-radius:25px;
-    background:rgba(255,255,255,.06);
-}
-
-.person-history h2{
-    font-family:'Baloo 2';
-    font-size:30px;
-    margin-bottom:15px;
-}
-
-.history-result{
-    display:grid;
-    gap:8px;
-}
-
-.history-row{
-    display:flex;
-    justify-content:space-between;
-    padding:12px;
-    border-radius:12px;
-    background:rgba(255,255,255,.04);
-}
-
-/* LOADING */
-
-.loading{
-    text-align:center;
-    padding:30px;
-    color:#cbd5e1;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:50px 20px 30px;
-    color:#94a3b8;
-}
-
-footer strong{
-    color:#facc15;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-    .dashboard{
-        grid-template-columns:1fr;
-    }
-
-    .person{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .person button{
-        width:100%;
-    }
-
-    .date-area{
-        align-items:stretch;
-        flex-direction:column;
-    }
-
-}
-
-</style>
+            --background: #f7faf7;
+            --white: #ffffff;
+            --border: #e3e9e4;
 
+            --shadow:
+                0 20px 50px rgba(22, 101, 52, 0.10);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+        }
+
+
+        /* ==============================
+           NAVIGATION
+        ============================== */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            min-height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--dark-green);
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--muted);
+
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--green);
+        }
+
+
+        /* ==============================
+           HERO
+        ============================== */
+
+        .hero {
+            min-height: 90vh;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(240,253,244,0.96),
+                    rgba(220,252,231,0.82)
+                );
+
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.1fr
+                0.9fr;
+
+            gap: 70px;
+
+            align-items: center;
+
+            padding: 90px 0;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            background: var(--light-green);
+
+            color: var(--dark-green);
+
+            border-radius: 999px;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+
+            line-height: 1.02;
+
+            letter-spacing: -0.05em;
+
+            color: var(--dark);
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: var(--green);
+        }
+
+        .hero-description {
+            color: var(--muted);
+
+            font-size: 1.1rem;
+
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 14px;
+
+            margin-top: 32px;
+        }
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 14px 22px;
+
+            border-radius: 12px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .button-primary {
+            background: var(--green);
+            color: white;
+
+            box-shadow:
+                0 12px 25px rgba(22,163,74,0.25);
+        }
+
+        .button-secondary {
+            background: white;
+
+            border: 1px solid var(--border);
+        }
+
+
+        /* ==============================
+           HERO IMAGE
+        ============================== */
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+
+            border-radius: 30px;
+
+            box-shadow: var(--shadow);
+
+            border: 8px solid white;
+        }
+
+        .location-card {
+            position: absolute;
+
+            left: -25px;
+            bottom: 25px;
+
+            background: white;
+
+            padding: 18px 22px;
+
+            border-radius: 15px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .location-card strong {
+            display: block;
+
+            color: var(--dark-green);
+        }
+
+        .location-card small {
+            color: var(--muted);
+        }
+
+
+        /* ==============================
+           GENERAL SECTIONS
+        ============================== */
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            max-width: 700px;
+
+            margin: 0 auto 55px;
+        }
+
+        .section-label {
+            color: var(--green);
+
+            font-size: 0.78rem;
+
+            font-weight: 800;
+
+            letter-spacing: 0.15em;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+
+            line-height: 1.1;
+
+            color: var(--dark);
+
+            margin: 10px 0 15px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+        }
+
+
+        /* ==============================
+           ABOUT
+        ============================== */
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .about-image img {
+            border-radius: 25px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+
+            margin-bottom: 18px;
+
+            color: var(--dark);
+        }
+
+        .about-text p {
+            color: var(--muted);
+
+            margin-bottom: 18px;
+        }
+
+
+        /* ==============================
+           PROFILE CARDS
+        ============================== */
+
+        .profile-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .profile-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            padding: 28px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            transition: 0.3s;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow: var(--shadow);
+        }
+
+        .profile-icon {
+            font-size: 2rem;
+
+            margin-bottom: 15px;
+        }
+
+        .profile-card small {
+            display: block;
+
+            color: var(--muted);
+
+            margin-bottom: 5px;
+        }
+
+        .profile-card strong {
+            color: var(--dark-green);
+        }
+
+
+        /* ==============================
+           MUSHROOM EXPLANATION
+        ============================== */
+
+        .mushroom-section {
+            background: #f0fdf4;
+        }
+
+        .mushroom-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .mushroom-card {
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            transition: 0.3s;
+        }
+
+        .mushroom-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow: var(--shadow);
+        }
+
+        .mushroom-card img {
+            width: 100%;
+
+            height: 230px;
+
+            object-fit: cover;
+        }
+
+        .mushroom-content {
+            padding: 25px;
+        }
+
+        .mushroom-content h3 {
+            color: var(--dark-green);
+
+            margin-bottom: 10px;
+        }
+
+        .mushroom-content p {
+            color: var(--muted);
+
+            font-size: 0.92rem;
+        }
+
+
+        /* ==============================
+           FARMING PROCESS
+        ============================== */
+
+        .steps {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .step {
+            padding: 30px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            border: 1px solid var(--border);
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+
+            display: grid;
+
+            place-items: center;
+
+            background: var(--light-green);
+
+            color: var(--dark-green);
+
+            border-radius: 50%;
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--muted);
+
+            font-size: 0.9rem;
+        }
+
+
+        /* ==============================
+           MY FARM
+        ============================== */
+
+        .farm-box {
+            display: grid;
+
+            grid-template-columns:
+                0.8fr
+                1.2fr;
+
+            gap: 50px;
+
+            align-items: center;
+
+            background: var(--dark-green);
+
+            color: white;
+
+            padding: 55px;
+
+            border-radius: 30px;
+        }
+
+        .farm-box h2 {
+            font-size: 2.5rem;
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+        .farm-box p {
+            color: #d1fae5;
+        }
+
+        .farm-location {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 10px 15px;
+
+            background: rgba(255,255,255,0.1);
+
+            border-radius: 10px;
+        }
+
+        .farm-image img {
+            border-radius: 20px;
+
+            width: 100%;
+
+            height: 350px;
+
+            object-fit: cover;
+        }
+
+
+        /* ==============================
+           CONTACT
+        ============================== */
+
+        .contact {
+            text-align: center;
+
+            background: white;
+        }
+
+        .contact-box {
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+        .contact-box h2 {
+            font-size: 3rem;
+
+            color: var(--dark);
+
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            background: #102016;
+
+            color: #cbd5ce;
+
+            padding: 30px 0;
+
+            text-align: center;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+
+        /* ==============================
+           ANIMATION
+        ============================== */
+
+        .fade {
+            opacity: 0;
+
+            transform: translateY(25px);
+
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
+        }
+
+        .fade.show {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media(max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero-grid,
+            .about-grid,
+            .farm-box {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .mushroom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .location-card {
+                left: 15px;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            section {
+                padding: 70px 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .profile-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .farm-box {
+                padding: 30px 22px;
+            }
+
+            .farm-box h2 {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<div class="container">
+
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
 
 <header>
 
-    <div class="logo">🪔✨🎶</div>
+    <div class="container navbar">
 
-    <h1>Deusi Bhailo Attendance</h1>
+        <a href="#home" class="logo">
+            Prakash<span>.</span>
+        </a>
 
-    <p>
-        Online attendance system • Shared between all phones
-    </p>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#mushroom">Mushroom</a>
+            <a href="#farm">My Farm</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-    <div class="status">
-        <span class="status-dot"></span>
-        <span id="connectionStatus">Connecting...</span>
     </div>
 
 </header>
 
 
-<!-- NAME -->
 
-<div class="input-box">
+<!-- ==========================================
+     HERO
+========================================== -->
 
-    <label for="name">
-        👤 Enter Your Name
-    </label>
+<section class="hero" id="home">
 
-    <input
-        id="name"
-        type="text"
-        maxlength="50"
-        placeholder="Example: Roman Phokrel"
-    >
+    <div class="container hero-grid">
 
-    <label for="date">
-        📅 Select Date
-    </label>
+        <div class="fade">
 
-    <input
-        id="date"
-        type="date"
-    >
+            <span class="badge">
+                🍄 Mushroom Farmer • Dang, Nepal
+            </span>
 
-    <button
-        class="main-btn"
-        onclick="markAttendance('present')"
-    >
-        ✅ MARK ME PRESENT
-    </button>
+            <h1>
+                Hello, I'm
+                <span>Prakash Sapkota</span>
+            </h1>
 
-    <br><br>
+            <p class="hero-description">
 
-    <button
-        class="main-btn"
-        style="background:linear-gradient(90deg,#e11d48,#be123c)"
-        onclick="markAttendance('absent')"
-    >
-        ❌ MARK ME ABSENT
-    </button>
+                I am a 26-year-old farmer from Tulsipur, Dang,
+                with a strong interest in agriculture and mushroom farming.
+                I am currently cultivating mushrooms in
+                Tulsipur-12, Kwangi, Dang.
 
-</div>
+            </p>
 
+            <div class="hero-buttons">
 
-<!-- DASHBOARD -->
+                <a href="#farm" class="button button-primary">
+                    🌱 Explore My Farm
+                </a>
 
-<div class="dashboard">
+                <a href="#mushroom" class="button button-secondary">
+                    🍄 Learn About Mushrooms
+                </a>
 
-    <div class="stat">
+            </div>
 
-        <div
-            class="number total-number"
-            id="totalCount"
-        >
-            0
         </div>
 
-        <p>Total Marked</p>
 
-    </div>
+        <div class="hero-image fade">
 
+            <img
+                src="https://www.himalkhabar.com/uploads/editor/Agriculture/ganga_1.jpg"
+                alt="Oyster mushroom farming in Nepal"
+            >
 
-    <div class="stat">
+            <div class="location-card">
 
-        <div
-            class="number present-number"
-            id="presentCount"
-        >
-            0
-        </div>
+                <strong>📍 My Farming Location</strong>
 
-        <p>Present</p>
+                <small>
+                    Tulsipur-12, Kwangi, Dang
+                </small>
 
-    </div>
+            </div>
 
-
-    <div class="stat">
-
-        <div
-            class="number absent-number"
-            id="absentCount"
-        >
-            0
-        </div>
-
-        <p>Absent</p>
-
-    </div>
-
-</div>
-
-
-<!-- TODAY -->
-
-<div class="date-area">
-
-    <h2 id="selectedDateTitle">
-        Today's Attendance
-    </h2>
-
-</div>
-
-<div
-    id="attendanceList"
-    class="attendance-list"
->
-
-    <div class="loading">
-        Loading attendance...
-    </div>
-
-</div>
-
-
-<!-- 7 DAY HISTORY -->
-
-<section class="history">
-
-    <h2>📅 Last 7 Days History</h2>
-
-    <div id="historyList">
-
-        <div class="loading">
-            Loading 7-day history...
         </div>
 
     </div>
@@ -517,740 +821,569 @@ footer strong{
 </section>
 
 
-<!-- PERSON HISTORY -->
 
-<section class="person-history">
+<!-- ==========================================
+     ABOUT ME
+========================================== -->
 
-    <h2>🔎 Check Someone's History</h2>
+<section id="about">
 
-    <input
-        id="searchName"
-        type="text"
-        placeholder="Enter person's name"
-    >
+    <div class="container">
 
-    <button
-        class="main-btn"
-        onclick="showPersonHistory()"
-    >
-        🔍 SEARCH HISTORY
-    </button>
+        <div class="section-heading fade">
 
-    <div
-        id="personHistoryResult"
-        class="history-result"
-        style="margin-top:20px"
-    ></div>
+            <span class="section-label">
+                ABOUT ME
+            </span>
+
+            <h2>
+                A Young Farmer with a Passion for Agriculture
+            </h2>
+
+            <p>
+                Learning, farming and building a future through agriculture.
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-image fade">
+
+                <img
+                    src="https://www.mushnepal.com/admin/description/Suman%20Maharjan.jpg"
+                    alt="Mushroom farmer harvesting oyster mushrooms"
+                >
+
+            </div>
+
+
+            <div class="about-text fade">
+
+                <h3>
+                    My Journey in Farming
+                </h3>
+
+                <p>
+                    My name is <strong>Prakash Sapkota</strong>.
+                    I am 26 years old and originally from
+                    <strong>Tulsipur-8, Dhogrya, Dang</strong>.
+                </p>
+
+                <p>
+                    I have a strong interest in farming and agriculture.
+                    At present, I am involved in mushroom farming in
+                    <strong>Tulsipur-12, Kwangi, Dang</strong>.
+                </p>
+
+                <p>
+                    Mushroom farming is an interesting form of agriculture
+                    because it can be practiced in a relatively small,
+                    controlled growing space and can make use of agricultural
+                    materials such as straw.
+                </p>
+
+                <p>
+                    My goal is to continue learning about farming,
+                    improve my cultivation skills and develop my agricultural
+                    work in the future.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- ==========================================
+     PROFILE INFORMATION
+========================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-heading fade">
+
+            <span class="section-label">
+                MY PROFILE
+            </span>
+
+            <h2>
+                Farmer Profile
+            </h2>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-card fade">
+
+                <div class="profile-icon">
+                    👨‍🌾
+                </div>
+
+                <small>
+                    Name
+                </small>
+
+                <strong>
+                    Prakash Sapkota
+                </strong>
+
+            </div>
+
+
+            <div class="profile-card fade">
+
+                <div class="profile-icon">
+                    🎂
+                </div>
+
+                <small>
+                    Age
+                </small>
+
+                <strong>
+                    26 Years
+                </strong>
+
+            </div>
+
+
+            <div class="profile-card fade">
+
+                <div class="profile-icon">
+                    🏡
+                </div>
+
+                <small>
+                    Hometown
+                </small>
+
+                <strong>
+                    Tulsipur-8, Dhogrya
+                </strong>
+
+            </div>
+
+
+            <div class="profile-card fade">
+
+                <div class="profile-icon">
+                    🌱
+                </div>
+
+                <small>
+                    Interest
+                </small>
+
+                <strong>
+                    Farming
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     MUSHROOM SECTION
+========================================== -->
+
+<section class="mushroom-section" id="mushroom">
+
+    <div class="container">
+
+        <div class="section-heading fade">
+
+            <span class="section-label">
+                ABOUT MUSHROOM
+            </span>
+
+            <h2>
+                Understanding Oyster Mushroom Farming
+            </h2>
+
+            <p>
+                Oyster mushrooms are cultivated edible fungi that can be
+                grown using suitable agricultural substrates under controlled
+                growing conditions.
+            </p>
+
+        </div>
+
+
+        <div class="mushroom-grid">
+
+
+            <article class="mushroom-card fade">
+
+                <img
+                    src="https://www.himalkhabar.com/uploads/editor/Agriculture/ganga_1.jpg"
+                    alt="Oyster mushrooms growing in a farm"
+                >
+
+                <div class="mushroom-content">
+
+                    <h3>
+                        🍄 Oyster Mushroom
+                    </h3>
+
+                    <p>
+                        Oyster mushrooms belong to the
+                        <em>Pleurotus</em> group and are widely cultivated
+                        in Nepal. They are commonly grown on prepared
+                        agricultural substrates.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="mushroom-card fade">
+
+                <img
+                    src="https://krishisuchana.com/app/uploads/2024/02/IMG_2344.jpeg"
+                    alt="Commercial mushroom cultivation"
+                >
+
+                <div class="mushroom-content">
+
+                    <h3>
+                        🌾 Growing Medium
+                    </h3>
+
+                    <p>
+                        Materials such as rice straw and other suitable
+                        agricultural residues can be prepared and used as
+                        growing substrates for oyster mushroom cultivation.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="mushroom-card fade">
+
+                <img
+                    src="https://www.mushnepal.com/admin/description/Suman%20Maharjan.jpg"
+                    alt="Harvesting oyster mushrooms"
+                >
+
+                <div class="mushroom-content">
+
+                    <h3>
+                        🧺 Harvesting
+                    </h3>
+
+                    <p>
+                        When mushroom clusters have developed properly,
+                        they can be harvested carefully and prepared for
+                        fresh consumption or sale.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     FARMING PROCESS
+========================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-heading fade">
+
+            <span class="section-label">
+                CULTIVATION
+            </span>
+
+            <h2>
+                Basic Mushroom Farming Process
+            </h2>
+
+            <p>
+                A simplified overview of the major stages involved in
+                oyster mushroom cultivation.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step fade">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Prepare Substrate
+                </h3>
+
+                <p>
+                    Suitable agricultural material such as straw is prepared,
+                    cleaned and treated before being used as a growing medium.
+                </p>
+
+            </div>
+
+
+            <div class="step fade">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Add Spawn
+                </h3>
+
+                <p>
+                    Mushroom spawn is introduced into the prepared substrate
+                    using clean cultivation practices.
+                </p>
+
+            </div>
+
+
+            <div class="step fade">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Incubation
+                </h3>
+
+                <p>
+                    The growing bags are kept under appropriate conditions
+                    while the mushroom mycelium colonizes the substrate.
+                </p>
+
+            </div>
+
+
+            <div class="step fade">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Fruiting & Harvest
+                </h3>
+
+                <p>
+                    Once the bags are ready for fruiting, suitable humidity,
+                    ventilation and light conditions are maintained until
+                    mushrooms develop and can be harvested.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     MY FARM
+========================================== -->
+
+<section id="farm">
+
+    <div class="container">
+
+        <div class="farm-box fade">
+
+            <div>
+
+                <span class="section-label">
+                    MY FARM
+                </span>
+
+                <h2>
+                    Mushroom Farming in Kwangi
+                </h2>
+
+                <p>
+
+                    I am currently working in mushroom farming at
+                    <strong>Tulsipur-12, Kwangi, Dang</strong>.
+
+                    Through farming, I am working to gain practical
+                    agricultural experience and build a future connected
+                    with agriculture.
+
+                </p>
+
+                <div class="farm-location">
+
+                    📍 Tulsipur-12, Kwangi, Dang, Nepal
+
+                </div>
+
+            </div>
+
+
+            <div class="farm-image">
+
+                <img
+                    src="https://www.mushnepal.com/admin/description/Suman%20Maharjan.jpg"
+                    alt="Oyster mushroom farm"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     CONTACT
+========================================== -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="contact-box fade">
+
+            <span class="section-label">
+                GET IN TOUCH
+            </span>
+
+            <h2>
+                Let's Connect
+            </h2>
+
+            <p>
+                Interested in mushroom farming, agriculture or my farming
+                journey? Feel free to connect with me.
+            </p>
+
+            <a
+                href="mailto:your-email@example.com"
+                class="button button-primary"
+            >
+                ✉️ Contact Prakash
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
 
 <footer>
 
-    Made for Deusi-Bhailo 🪔
+    <div class="container">
 
-    <br>
+        <p>
+            © <span id="year"></span>
+            <strong>Prakash Sapkota</strong>
+            | Mushroom Farmer from Dang, Nepal 🇳🇵
+        </p>
 
-    <strong>Shared Online Attendance System</strong>
+    </div>
 
 </footer>
 
-</div>
 
 
-<!-- FIREBASE -->
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
 
-<script type="module">
+<script>
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    /* Current year */
 
-import {
-    getFirestore,
-    collection,
-    doc,
-    setDoc,
-    getDoc,
-    getDocs,
-    query,
-    where,
-    onSnapshot,
-    deleteDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
 
 
-/* =====================================================
-   🔥 PUT YOUR FIREBASE CONFIG HERE
-===================================================== */
+    /* Scroll animation */
 
-const firebaseConfig = {
+    const elements =
+        document.querySelectorAll(".fade");
 
-    apiKey: "YOUR_API_KEY",
 
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    const observer =
+        new IntersectionObserver(
 
-    projectId: "YOUR_PROJECT_ID",
+            (entries, observer) => {
 
-    storageBucket: "YOUR_PROJECT.firebasestorage.app",
+                entries.forEach(entry => {
 
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+                    if (entry.isIntersecting) {
 
-    appId: "YOUR_APP_ID"
+                        entry.target.classList.add("show");
 
-};
+                        observer.unobserve(entry.target);
 
+                    }
 
-/* START FIREBASE */
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const nameInput =
-    document.getElementById("name");
-
-const dateInput =
-    document.getElementById("date");
-
-const attendanceList =
-    document.getElementById("attendanceList");
-
-const historyList =
-    document.getElementById("historyList");
-
-const connectionStatus =
-    document.getElementById("connectionStatus");
-
-
-/* =====================================================
-   TODAY
-===================================================== */
-
-function getToday(){
-
-    const d = new Date();
-
-    const year =
-        d.getFullYear();
-
-    const month =
-        String(d.getMonth()+1).padStart(2,"0");
-
-    const day =
-        String(d.getDate()).padStart(2,"0");
-
-    return `${year}-${month}-${day}`;
-
-}
-
-dateInput.value = getToday();
-
-
-/* =====================================================
-   NORMALIZE NAME
-===================================================== */
-
-function normalizeName(name){
-
-    return name
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g," ");
-
-}
-
-
-/* =====================================================
-   SAFE FIRESTORE DOCUMENT ID
-===================================================== */
-
-function makeDocumentId(date,name){
-
-    const clean =
-        normalizeName(name)
-        .replace(/[^a-z0-9]+/g,"-");
-
-    return `${date}_${clean}`;
-
-}
-
-
-/* =====================================================
-   MARK ATTENDANCE
-===================================================== */
-
-window.markAttendance = async function(status){
-
-    const name =
-        nameInput.value.trim();
-
-    const date =
-        dateInput.value;
-
-    if(!name){
-
-        alert("Please enter your name.");
-
-        return;
-    }
-
-    if(!date){
-
-        alert("Please select a date.");
-
-        return;
-    }
-
-
-    if(name.length < 2){
-
-        alert("Please enter a valid name.");
-
-        return;
-    }
-
-
-    const documentId =
-        makeDocumentId(date,name);
-
-    const attendanceRef =
-        doc(db,"attendance",documentId);
-
-
-    try{
-
-        /*
-         The document ID contains:
-         DATE + NAME
-
-         Therefore the same person
-         cannot create unlimited duplicate
-         attendance records for one date.
-        */
-
-        await setDoc(
-            attendanceRef,
-            {
-
-                name:name.trim(),
-
-                normalizedName:
-                    normalizeName(name),
-
-                date:date,
-
-                status:status,
-
-                updatedAt:
-                    serverTimestamp()
+                });
 
             },
+
             {
-                merge:true
+                threshold: 0.12
             }
+
         );
 
 
-        alert(
-            status === "present"
-            ? "✅ Your attendance is marked PRESENT!"
-            : "❌ Your attendance is marked ABSENT."
-        );
+    elements.forEach(element => {
 
-        nameInput.value = "";
+        observer.observe(element);
 
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Could not save attendance.\n\n"
-            + error.message
-        );
-
-    }
-
-};
-
-
-/* =====================================================
-   REAL-TIME SELECTED DATE
-===================================================== */
-
-function loadSelectedDate(){
-
-    const date =
-        dateInput.value;
-
-    if(!date) return;
-
-
-    const attendanceQuery =
-        query(
-            collection(db,"attendance"),
-            where("date","==",date)
-        );
-
-
-    onSnapshot(
-        attendanceQuery,
-        snapshot => {
-
-            connectionStatus.textContent =
-                "Online • Live database";
-
-
-            renderAttendance(
-                snapshot.docs.map(
-                    doc => doc.data()
-                )
-            );
-
-        },
-
-        error => {
-
-            console.error(error);
-
-            connectionStatus.textContent =
-                "Database connection error";
-
-            attendanceList.innerHTML =
-                `<div class="loading">
-                    ❌ Could not load attendance.
-                 </div>`;
-
-        }
-
-    );
-
-}
-
-
-/* =====================================================
-   RENDER TODAY
-===================================================== */
-
-function renderAttendance(data){
-
-    let present = 0;
-
-    let absent = 0;
-
-
-    data.sort(
-        (a,b) =>
-            a.name.localeCompare(b.name)
-    );
-
-
-    if(data.length === 0){
-
-        attendanceList.innerHTML =
-            `<div class="loading">
-                No attendance marked yet.
-             </div>`;
-
-    }
-    else{
-
-        attendanceList.innerHTML =
-            data.map(person => {
-
-                if(person.status === "present"){
-                    present++;
-                }
-
-                if(person.status === "absent"){
-                    absent++;
-                }
-
-                const className =
-                    person.status === "present"
-                    ? "present"
-                    : "absent";
-
-                const text =
-                    person.status === "present"
-                    ? "✅ PRESENT"
-                    : "❌ ABSENT";
-
-
-                return `
-
-                    <div class="person">
-
-                        <div class="person-name">
-                            👤 ${escapeHTML(person.name)}
-                        </div>
-
-                        <div
-                            class="person-status ${className}"
-                        >
-                            ${text}
-                        </div>
-
-                    </div>
-
-                `;
-
-            }).join("");
-
-    }
-
-
-    document.getElementById(
-        "totalCount"
-    ).textContent = data.length;
-
-
-    document.getElementById(
-        "presentCount"
-    ).textContent = present;
-
-
-    document.getElementById(
-        "absentCount"
-    ).textContent = absent;
-
-
-    document.getElementById(
-        "selectedDateTitle"
-    ).textContent =
-        `Attendance • ${dateInput.value}`;
-
-}
-
-
-/* =====================================================
-   DATE CHANGE
-===================================================== */
-
-dateInput.addEventListener(
-    "change",
-    loadSelectedDate
-);
-
-
-/* =====================================================
-   LOAD 7 DAYS
-===================================================== */
-
-async function loadSevenDays(){
-
-    historyList.innerHTML =
-        `<div class="loading">
-            Loading history...
-         </div>`;
-
-
-    const dates = [];
-
-
-    for(let i=0;i<7;i++){
-
-        const d = new Date();
-
-        d.setDate(
-            d.getDate()-i
-        );
-
-
-        const year =
-            d.getFullYear();
-
-        const month =
-            String(d.getMonth()+1)
-            .padStart(2,"0");
-
-        const day =
-            String(d.getDate())
-            .padStart(2,"0");
-
-
-        dates.push(
-            `${year}-${month}-${day}`
-        );
-
-    }
-
-
-    let html = "";
-
-
-    for(const date of dates){
-
-        try{
-
-            const q =
-                query(
-                    collection(db,"attendance"),
-                    where("date","==",date)
-                );
-
-
-            const snapshot =
-                await getDocs(q);
-
-
-            let present = 0;
-
-            let absent = 0;
-
-
-            snapshot.forEach(
-                doc => {
-
-                    const data =
-                        doc.data();
-
-                    if(data.status === "present")
-                        present++;
-
-                    if(data.status === "absent")
-                        absent++;
-
-                }
-            );
-
-
-            html += `
-
-                <div class="day-card">
-
-                    <div class="day-header">
-
-                        <h3>
-                            📅 ${date}
-                        </h3>
-
-                        <div class="badges">
-
-                            <span class="badge green">
-                                Present: ${present}
-                            </span>
-
-                            <span class="badge red">
-                                Absent: ${absent}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div>
-
-                        ${
-                            snapshot.size === 0
-
-                            ? `<span style="color:#94a3b8">
-                                No records
-                               </span>`
-
-                            : snapshot.docs
-                                .map(
-                                    d => {
-
-                                        const p =
-                                            d.data();
-
-                                        return `
-                                            <div
-                                                style="
-                                                padding:7px 0;
-                                                color:#cbd5e1;
-                                                "
-                                            >
-                                                ${
-                                                    p.status === "present"
-                                                    ? "🟢"
-                                                    : "🔴"
-                                                }
-                                                ${escapeHTML(p.name)}
-                                            </div>
-                                        `;
-
-                                    }
-                                )
-                                .join("")
-
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-        catch(error){
-
-            console.error(error);
-
-        }
-
-    }
-
-
-    historyList.innerHTML =
-        html ||
-        `<div class="loading">
-            No history found.
-         </div>`;
-
-}
-
-
-/* =====================================================
-   PERSON HISTORY
-===================================================== */
-
-window.showPersonHistory = async function(){
-
-    const name =
-        document.getElementById(
-            "searchName"
-        ).value.trim();
-
-
-    const result =
-        document.getElementById(
-            "personHistoryResult"
-        );
-
-
-    if(!name){
-
-        result.innerHTML =
-            `<div class="loading">
-                Enter a name first.
-             </div>`;
-
-        return;
-    }
-
-
-    const normalized =
-        normalizeName(name);
-
-
-    const q =
-        query(
-            collection(db,"attendance"),
-            where(
-                "normalizedName",
-                "==",
-                normalized
-            )
-        );
-
-
-    try{
-
-        const snapshot =
-            await getDocs(q);
-
-
-        const records =
-            snapshot.docs
-                .map(d => d.data())
-                .sort(
-                    (a,b) =>
-                        b.date.localeCompare(a.date)
-                )
-                .slice(0,7);
-
-
-        if(records.length === 0){
-
-            result.innerHTML =
-                `<div class="loading">
-                    No attendance found for
-                    <strong>${escapeHTML(name)}</strong>.
-                 </div>`;
-
-            return;
-        }
-
-
-        result.innerHTML =
-            records.map(record => `
-
-                <div class="history-row">
-
-                    <span>
-                        📅 ${record.date}
-                    </span>
-
-                    <strong
-                        style="
-                        color:${
-                            record.status === "present"
-                            ? "#4ade80"
-                            : "#fb7185"
-                        };
-                        "
-                    >
-                        ${
-                            record.status === "present"
-                            ? "PRESENT"
-                            : "ABSENT"
-                        }
-                    </strong>
-
-                </div>
-
-            `).join("");
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        result.innerHTML =
-            `<div class="loading">
-                ❌ Error loading history.
-             </div>`;
-
-    }
-
-};
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(text){
-
-    const div =
-        document.createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
-
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-loadSelectedDate();
-
-loadSevenDays();
+    });
 
 </script>
+
 
 </body>
 </html>
